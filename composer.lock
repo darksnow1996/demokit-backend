@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ff50e675f0283ed071dc8b75367b526",
+    "content-hash": "6b8fd1fa088eee2f15fcb4e3adbbe561",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -114,16 +114,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.228.5",
+            "version": "3.229.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "8b6e626e02c42310c3ce8615acc7b2c992e48c97"
+                "reference": "5e01f0809682060dc5018bf5f267f40c32f4944d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8b6e626e02c42310c3ce8615acc7b2c992e48c97",
-                "reference": "8b6e626e02c42310c3ce8615acc7b2c992e48c97",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5e01f0809682060dc5018bf5f267f40c32f4944d",
+                "reference": "5e01f0809682060dc5018bf5f267f40c32f4944d",
                 "shasum": ""
             },
             "require": {
@@ -199,9 +199,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.228.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.229.0"
             },
-            "time": "2022-06-28T18:13:37+00:00"
+            "time": "2022-06-29T18:15:30+00:00"
         },
         {
             "name": "brick/math",
@@ -2249,16 +2249,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.59.0",
+            "version": "2.59.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "9cea2f72585a46d0651ee6d4c8c8f752e78c16c6"
+                "reference": "a9000603ea337c8df16cc41f8b6be95a65f4d0f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/9cea2f72585a46d0651ee6d4c8c8f752e78c16c6",
-                "reference": "9cea2f72585a46d0651ee6d4c8c8f752e78c16c6",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a9000603ea337c8df16cc41f8b6be95a65f4d0f5",
+                "reference": "a9000603ea337c8df16cc41f8b6be95a65f4d0f5",
                 "shasum": ""
             },
             "require": {
@@ -2347,7 +2347,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-26T20:26:59+00:00"
+            "time": "2022-06-29T21:43:55+00:00"
         },
         {
             "name": "nette/schema",
@@ -8399,8 +8399,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0",
-        "ext-mongodb": "*"
+        "ext-mongodb": "*",
+        "php": "^7.4.26"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
