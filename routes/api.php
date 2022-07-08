@@ -25,19 +25,24 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('verify', [VerifyController::class, 'confirmUser']);
 Route::post('resend', [VerifyController::class, 'resendConfToken']);
-Route::post('kits', [KitController::class, 'create']);
+
 
 
 Route::group(['middleware'=> ['aws-cognito',]], function(){
 
-    
+
     //Kits Endpoints
+    Route::get('kits', [KitController::class, 'allKits']);
+    Route::get('kits/{id}', [KitController::class, 'getKit']);
     Route::post('kits', [KitController::class, 'create']);
-    
+    Route::post('kits/{id}/info', [KitController::class, 'basicInfo']);
+    Route::post('kits/{id}/metadata', [KitController::class, 'addMetadata']);
+    Route::post('kits/{id}/content', [KitController::class, 'addContent']);
+
     Route::post('reset', [AuthController::class, 'resetPassword']);
 
-Route::post('test', function(){
-    return auth()->user();
+Route::post('user', function(){
+    return response()->json(['message' => 'Token still valid'], 200);;
 });
 
 });
