@@ -26,7 +26,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+
     ];
+
+
+    public function kits(){
+        return $this->hasMany(Kit::class,'user_id','_id');
+    }
 
     // /**
     //  * The attributes that should be hidden for serialization.

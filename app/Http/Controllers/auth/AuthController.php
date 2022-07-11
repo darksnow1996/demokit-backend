@@ -97,11 +97,12 @@ class AuthController extends Controller
         $collection = collect($request->all());
         //Authenticate with Cognito Package Trait (with 'api' as the auth guard)
         if ($claim = $this->attemptLogin($collection, 'api', 'email', 'password', true)) {
-        // var_dump($claim);
+      //  var_dump($claim->data["RefreshToken"]);
             if ($claim instanceof AwsCognitoClaim) {
                 return response()->json([
                     'user' => $claim->getUser(),
-                    'token' => $claim->getToken()
+                    'token' => $claim->getToken(),
+                    'refresh_token' => $claim->data["RefreshToken"],
                 ], Response::HTTP_OK);
          }
 
