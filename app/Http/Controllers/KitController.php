@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContentFileRequest;
 use App\Http\Requests\KitRequest;
 use App\Models\Content;
+use App\Models\ContentFile;
+use App\Models\File;
 use App\Models\Kit;
 use App\Models\Service;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class KitController extends Controller
 {
@@ -205,6 +209,52 @@ class KitController extends Controller
             [
                 "data" => $contents
             ], Response::HTTP_OK);
+
+    }
+
+    public function uploadContent(ContentFileRequest $request,$id,$cid){
+        $kit = auth()->user()->kits()->find($id);
+        if(!$kit){
+            return response()->json(
+                [
+                    "message" => "Kit not found"
+                ], Response::HTTP_NOT_FOUND);
+        }
+        $content = $kit->contents()->find($cid);
+        if(!$content){
+            return response()->json(
+                [
+                    "message" => "Content not found"
+                ], Response::HTTP_NOT_FOUND);
+        }
+        $type = $content->type;
+        $filename = "DK_".date('mdYHis') . uniqid();
+        $folder = "kit_".$kit->_id."/content/";
+        $fileextension = $request->file->extension();
+
+       // dd(env('AWS_URL'));
+        $path = Storage::disk('s3')->putFileAs($folder, $request->file,$filename.".".$fileextension);
+
+        $path = Storage::disk('s3')->url($path);
+       if($path){
+        $file = new ContentFile;
+        $file->name = $filename;
+        $file->path = $path;
+        $file->ext = $fileextension;
+      //  dd($content);
+        $content->contentfile()->save($file);
+
+        return response()->json(
+            [
+                "message" => "File Upload successfully"
+            ], 200);
+
+       }
+
+       return response()->json(
+        [
+            "message" => "Unable to complete upload"
+        ], Response::HTTP_SERVICE_UNAVAILABLE);
 
     }
 }

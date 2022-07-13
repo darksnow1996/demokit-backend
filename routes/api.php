@@ -41,6 +41,7 @@ Route::group(['middleware'=> ['aws-cognito',]], function(){
     Route::post('kits/{id}/metadata', [KitController::class, 'addMetadata']);
     Route::post('kits/{id}/content', [KitController::class, 'addContent']);
     Route::get('kits/{id}/content', [KitController::class, 'getContents']);
+    Route::post('kits/{id}/content/{cid}', [KitController::class, 'uploadContent']);
 
     //Services Endpoints
     Route::get('services', [ServiceController::class, 'getServices']);

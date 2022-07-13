@@ -13,6 +13,10 @@ class Content extends Model
         return $this->belongsTo(Kit::class,'kit_id');
     }
 
+    public function contentfile(){
+        return $this->embedsOne(ContentFile::class);
+    }
+
 
 
 }

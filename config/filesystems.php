@@ -49,8 +49,12 @@ return [
         'region' => array_key_exists('AWS_DEFAULT_REGION', $_SERVER) ? $_SERVER['AWS_DEFAULT_REGION'] : env('AWS_DEFAULT_REGION','us-east-1'),
             'bucket' => array_key_exists('AWS_BUCKET', $_SERVER) ? $_SERVER['AWS_BUCKET'] : env('AWS_BUCKET'),
             'url' =>  array_key_exists('AWS_URL', $_SERVER) ? $_SERVER['AWS_URL'] : env('AWS_URL'),
-            'endpoint' => array_key_exists('AWS_ENDPOINT', $_SERVER) ? $_SERVER['AWS_ENDPOINT'] : env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' =>  array_key_exists('AWS_USE_PATH_STYLE_ENDPOINT', $_SERVER) ? $_SERVER['AWS_USE_PATH_STYLE_ENDPOINT'] : env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+           // the below 'endpoint' url is actually used:
+        'endpoint' => env('AWS_URL'),
+        // prevent bucket name from being added to the hostname:
+        'bucket_endpoint' => false,
+        // use older urls:
+        'use_path_style_endpoint' => true,
         ],
 
     ],
