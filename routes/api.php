@@ -25,6 +25,7 @@ Route::get('/', function (Request $request) {
 //Authentication
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('token', [AuthController::class, 'refreshToken'])->name('token');
 Route::post('verify', [VerifyController::class, 'confirmUser']);
 Route::post('resend', [VerifyController::class, 'resendConfToken']);
 

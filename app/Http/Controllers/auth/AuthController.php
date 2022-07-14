@@ -135,4 +135,55 @@ class AuthController extends Controller
 
 
     }
+
+
+    public function refreshToken(Request $request)
+    {
+        try{
+
+
+              //Convert request to collection
+        $collection = collect($request->all());
+        //Authenticate with Cognito Package Trait (with 'api' as the auth guard)
+
+        $claim = $this->attemptRefreshToken($collection);
+        dd("here");
+      var_dump($claim);
+    //         if ($claim instanceof AwsCognitoClaim) {
+    //             return response()->json([
+    //                 'user' => $claim->getUser(),
+    //                 'token' => $claim->getToken(),
+    //                 'refresh_token' => $claim->data["RefreshToken"],
+    //             ], Response::HTTP_OK);
+    //      }
+
+    //      $claimMessage = $claim->getData()->message ? $claim->getData()->message:"Invalid credentials";
+    //   // return $claim;
+    //   return response()->json([
+    //     'message' => $claimMessage
+    //   ], Response::HTTP_UNAUTHORIZED);
+    // //  var_dump($claim->getData()->message);
+
+
+        // } //End if
+
+
+        }
+        catch(NoLocalUserException $e){
+            // throw $e;
+             return response()->json(['status' => 'error', 'message' => "User does not exist"], 400);
+
+
+         }
+        catch(Exception $e){
+           // throw $e;
+            return response()->json(['status' => 'errorss', 'message' => $e->getMessage()], 400);
+
+
+        }
+
+
+
+
+    }
 }

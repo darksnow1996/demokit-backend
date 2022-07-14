@@ -181,6 +181,7 @@ class KitController extends Controller
         $content = new Content;
 
         $content->title  = $request->title;
+        $content->description  = $request->description;
         $content->duration  = $request->duration;
         $content->level = $request->level;
         $content->type = $request->type;

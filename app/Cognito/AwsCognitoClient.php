@@ -56,4 +56,38 @@ class AwsCognitoClient extends CognitoAwsCognitoClient{
         return (bool)$response['UserSub'];
     } //Function ends
 
+
+    public function refreshTokenAuthenticate($refreshToken,$username)
+    {
+        try {
+            //Build payload
+            $payload = [
+                'AuthFlow' => 'REFRESH_TOKEN_AUTH',
+                'AuthParameters' => [
+                    'REFRESH_TOKEN ' => $refreshToken,
+                    "DEVICE_KEY"=> null,
+
+                ],
+                'ClientId' => $this->clientId,
+                'UserPoolId' => $this->poolId,
+            ];
+          //  var_dump($this->poolId);
+
+            //Add Secret Hash in case opef Client Secret being configured
+            if ($this->boolClientSecret) {
+                $payload['AuthParameters'] = array_merge($payload['AuthParameters'], [
+                    'SECRET_HASH' => $this->cognitoSecretHash($username)
+                ]);
+            } //End if
+            //var_dump($payload);
+
+            $response = $this->client->adminInitiateAuth($payload);
+        } catch (CognitoIdentityProviderException $exception) {
+            throw $exception;
+        }
+
+        return $response;
+    } //Function ends
+
+
 }
