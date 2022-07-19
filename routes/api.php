@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\auth\VerifyController;
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\KitController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
@@ -46,6 +47,10 @@ Route::group(['middleware'=> ['aws-cognito',]], function(){
 
     //Services Endpoints
     Route::get('services', [ServiceController::class, 'getServices']);
+
+    //Catalogs Endpoints
+    Route::get('catalog', [CatalogController::class, 'getCatalogs']);
+    Route::get('catalog/{id}', [CatalogController::class, 'getKit']);
 
     Route::post('reset', [AuthController::class, 'resetPassword']);
 
