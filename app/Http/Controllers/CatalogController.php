@@ -32,4 +32,32 @@ class CatalogController extends Controller
                 "data"=> $kit
             ], 200);
     }
+
+    public function searchCatalog(Request $request,Kit $kit){
+        $kit = $kit->newQuery();
+        if($request->has('q') && $request->q){
+            $q = $request->q;
+            $kit->where('title', 'like', '%'.$q.'%');
+        }
+        if($request->has('level') && $request->level){
+            $level = $request->level;
+             $kit->where('level', $level);
+        }
+        if($request->has('services')){
+            $services = $request->services;
+            // $kit->whereHas('services', function ($query) use ($request) {
+            //     var_dump("here");
+            //     $query->whereIn('services', $request->services);
+            // });
+             $kit->whereIn('services._id',  $services);
+        }
+
+        $kit = $kit->whereNotNull('published_at')->get();
+
+        return response()->json(
+            [
+                "data"=> $kit
+            ], 200);
+
+    }
 }

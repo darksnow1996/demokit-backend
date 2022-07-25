@@ -10,6 +10,7 @@ use App\Models\File;
 use App\Models\Kit;
 use App\Models\Service;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -257,5 +258,29 @@ class KitController extends Controller
             "message" => "Unable to complete upload"
         ], Response::HTTP_SERVICE_UNAVAILABLE);
 
+    }
+
+
+    public function publishKit($id){
+        $kit = Kit::find($id);
+        if(!$kit){
+            return response()->json(
+                [
+                    "message" => "Kit not found"
+                ], Response::HTTP_NOT_FOUND);
+        }
+        if($kit->published_at){
+            return response()->json(
+                [
+                    "message" => "Kit already published"
+                ], Response::HTTP_OK);
+        }
+        $kit->published_at= Carbon::now()->timestamp;
+        $kit->save();
+
+        return response()->json(
+            [
+                "result" => "Kit Successfully published"
+            ], 201);
     }
 }

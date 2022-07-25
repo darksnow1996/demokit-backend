@@ -13,6 +13,7 @@ class Kit extends Model
     protected $guarded = [
         '_id',
     ];
+    protected $dates = ['published_at'];
     // protected $casts = [
     //     'user_id' => ObjectIDCast::class,
 

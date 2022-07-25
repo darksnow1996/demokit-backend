@@ -44,13 +44,16 @@ Route::group(['middleware'=> ['aws-cognito',]], function(){
     Route::post('kits/{id}/content', [KitController::class, 'addContent']);
     Route::get('kits/{id}/content', [KitController::class, 'getContents']);
     Route::post('kits/{id}/content/{cid}', [KitController::class, 'uploadContent']);
+    Route::post('kits/{id}/publish', [KitController::class, 'publishKit']);
 
     //Services Endpoints
     Route::get('services', [ServiceController::class, 'getServices']);
 
     //Catalogs Endpoints
     Route::get('catalog', [CatalogController::class, 'getCatalogs']);
+    Route::get('catalog/search', [CatalogController::class, 'searchCatalog']);
     Route::get('catalog/{id}', [CatalogController::class, 'getKit']);
+
 
     Route::post('reset', [AuthController::class, 'resetPassword']);
 

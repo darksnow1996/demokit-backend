@@ -7,6 +7,8 @@
     "require": {
         "php": "^7.4.26",
         "ext-mongodb": "*",
+        "bref/bref": "^1.7",
+        "bref/extra-php-extensions": "^0.11.32",
         "ellaisys/aws-cognito": "^1.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
