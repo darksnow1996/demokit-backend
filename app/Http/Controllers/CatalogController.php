@@ -19,7 +19,7 @@ class CatalogController extends Controller
 
 
     public function getKit($id){
-        $kit = Kit::where('_id', $id)->with("contents")->first();
+        $kit = Kit::where('_id', $id)->with("contents")->with("author")->first();
         if(!$kit){
             return response()->json(
                 [
@@ -49,10 +49,10 @@ class CatalogController extends Controller
             //     var_dump("here");
             //     $query->whereIn('services', $request->services);
             // });
-             $kit->whereIn('services._id',  $services);
+             $kit->where('services._id','all',  $services);
         }
 
-        $kit = $kit->whereNotNull('published_at')->get();
+        $kit = $kit->whereNotNull('published_at')->with('author')->orderBy('published_at','desc')->get();
 
         return response()->json(
             [
@@ -61,3 +61,4 @@ class CatalogController extends Controller
 
     }
 }
+

@@ -80,7 +80,7 @@ class KitController extends Controller
         try{
         $user = auth()->user();
       //  var_dump($user)
-        $kits =$user->kits()->get();
+        $kits =$user->kits()->orderBy('created_at','desc')->get();
        // $kit = Kit::find('62c8afa5d570b0aa660f81a0');
         //var_dump($kit);
 
@@ -206,7 +206,7 @@ class KitController extends Controller
                 ], Response::HTTP_NOT_FOUND);
         }
 
-        $contents = $kit->contents()->get();
+        $contents = $kit->contents()->orderBy('created_at','desc')->get();
         return response()->json(
             [
                 "data" => $contents
